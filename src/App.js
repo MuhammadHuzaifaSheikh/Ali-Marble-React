@@ -1,19 +1,17 @@
 import React,{Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Home from "./Home";
-import Contact from "./Contact";
-import About from "./About";
-import Portfolio from "./protfolio";
-import AdminPannal from "./AdminPannal";
+import Home from "./Components/Nev-Items/Home";
+import Contact from "./Components/Nev-Items/Contact";
+import About from "./Components/Nev-Items/About";
+import Portfolio from "./Components/Nev-Items/protfolio";
+import AdminPannal from "./Components/Admin/AdminPannal.js";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Footer from "./footer";
-import Mosaic from "./Mosaic";
-import Vanity from "./Vanity";
-import Starp from "./Starp";
-import {createBrowserHistory} from "history";
+import Footer from "./Components/Nev-Items/footer";
+import Mosaic from "./Components/Types-Marble/Mosaic";
+import Vanity from "./Components/Types-Marble/Vanity";
+import Starp from "./Components/Types-Marble/Starp";
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './fonts.css'
 import './assets/css/style.css';
@@ -32,10 +30,9 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    NavLink
 } from "react-router-dom";
-import NevAdmin from "./NevAdmin";
-import AdminHome from "./AdminHome";
+
 class App extends Component{
     state = {
         isOpen: false
@@ -46,27 +43,44 @@ class App extends Component{
         this.setState({ isOpen: !this.state.isOpen });
     }
     render() {
-        const history = createBrowserHistory()
 
         return (
             <div className="App">
-                <Router history={history}>
+                <Router>
                     <header id="header" className="fixed-top header-inner-pages">
                         <div className="container d-flex align-items-center">
                             <Navbar  className="container bg-light mr-auto" expand="lg">
-                                <Navbar.Brand><img src={logo} alt="logo"/></Navbar.Brand>
+                                <Navbar.Brand></Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
-                                        <Nav.Link><Link style={{borderBottom:'none'}}  to='/Home'>Home</Link></Nav.Link>
-                                        <Nav.Link><Link style={{borderBottom:'none'}}  to='/About'>About</Link></Nav.Link>
-                                        <Nav.Link><Link style={{borderBottom:'none'}}  to='/Contact'>Contact</Link></Nav.Link>
-                                        <Nav.Link><Link style={{borderBottom:'none'}}  to='/Portfolio'>Portfolio</Link></Nav.Link>
+
+                                        <ul className="navbar-nav">
+                                            <li className="nav-item active">
+                                                <NavLink activeClassName='linkStyle '  to='/home' className="nav-link" >Home
+                                                   </NavLink>
+                                            </li>
+                                            <li className="nav-item active">
+                                                <NavLink activeClassName='linkStyle'   to='/about' className="nav-link " href="#">About</NavLink>
+                                            </li>
+                                            <li className="nav-item active">
+                                                <NavLink activeClassName='linkStyle'   to='/contact' className="nav-link" href="#">Contact </NavLink>
+                                            </li>
+                                        </ul>
+                                        {/*<Nav.Link>
+                                        {/*<Nav.Link><Link style={{borderBottom:'none'}}  to='/About'>About</Link></Nav.Link>*/}
+                                        {/*<Nav.Link><Link style={{borderBottom:'none'}}  to='/Contact'>Contact</Link></Nav.Link>*/}
+                                        {/*<Nav.Link><Link style={{borderBottom:'none'}}  to='/Portfolio'>Portfolio</Link></Nav.Link>*/}
                                         <NavDropdown title="Products" id="basic-nav-dropdown">
-                                            <NavDropdown.Item><Link style={{borderBottom:'none'}}  to='/Vanity'>Vanity Marble</Link></NavDropdown.Item>
-                                            <NavDropdown.Item><Link style={{borderBottom:'none'}}  to='/Mosaic'>Mosaic Marble</Link></NavDropdown.Item>
-                                            <NavDropdown.Item ><Link style={{borderBottom:'none'}}  to='/Starp'>Stairs Marble</Link></NavDropdown.Item>
-                                            <NavDropdown.Divider />
+                                            <ul>
+                                            <li className="nav-item dropdown">
+                                                <NavLink activeClassName='dropdown'  to='/vanity' className="dropdown-item" href="#">Vanity </NavLink>
+                                                <NavLink activeClassName='dropdown'  to='/mosaic' className="dropdown-item" href="#">Mosaic </NavLink>
+                                                <NavLink activeClassName='dropdown'  to='/stairs' className="dropdown-item" href="#">Stairs </NavLink>
+
+
+                                            </li>
+                                            </ul>
                                         </NavDropdown>
                                     </Nav>
 
@@ -79,28 +93,28 @@ class App extends Component{
                     </header>
                     {/*End Header*/}
                     <Switch>
-                        <Route path="/Home">
+                        <Route path="/home">
                             <Home/>
                         </Route>
-                        <Route path="/Contact">
+                        <Route path="/contact">
                             <Contact/>
                         </Route>
-                        <Route path="/About">
+                        <Route path="/about">
                             <About/>
                         </Route>
                         <Route exact path="/admin">
                             <AdminPannal/>
                         </Route>
-                        <Route exact path="/Portfolio">
+                        <Route exact path="/portfolio">
                             <Portfolio/>
                         </Route>
-                        <Route exact path="/Vanity">
+                        <Route exact path="/vanity">
                             <Vanity/>
                         </Route>
-                        <Route exact path="/Mosaic">
+                        <Route exact path="/mosaic">
                             <Mosaic/>
                         </Route>
-                        <Route exact path="/Starp">
+                        <Route exact path="/starp">
                             <Starp/>
                         </Route>
                         <Route exact path="/">
